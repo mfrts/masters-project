@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0M22H899X4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0M22H899X4');
+</script>
+
+  <base target="_top">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <style>
+    /* CSS styles */
+  
+    /* Styles for the navigation bar */
+  
+    body {
+      margin: 0;
+    }
+
+    .navbar {
+      width: calc(100% - 50px);
+      height: 75px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 0px 25px;
+      position: fixed;
+      top: 0;
+      z-index: 1;
+      box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar a {
+      float: left;
+      color: #006747;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+      font-size: 20px;
+      font-family: 'Benton Sans', 'BentonSans', Arial, Helvetica, sans-serif;
+    }
+
+    .navbar a.active {
+      background-color: #0067471F;
+      border-radius: 18px;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline
+    }
+
+    .navbar-logo-menu-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar-logo {
+      height: 65px;
+      margin-right: 15px;
+    }
+
+    .navbar-menu-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navbar-search-container {
+      flex: 1;    
+      align-content: end;
+      display: flex;
+      justify-content: end;
+    }
+
+    .search {
+      --padding: 15px;
+      
+      flex: 1;
+      max-width: 450px;
+      min-width: 250px;
+      display: flex;
+      padding: var(--padding);
+      padding-right: 2px;
+      border-radius: 28px;
+      background: #f6f6f6;
+      transition: box-shadow 0.25s;
+    }
+
+    .search:focus-within{
+      box-shadow: 0 0 2px rgba(0,0,0,0.75)
+    }
+
+    .search-input{
+      font-size: 16px;
+      font-family: 'Lexend', sans-serif;
+      color: #333333;
+      margin-left: var(--padding);
+      outline: none;
+      border: none;
+      background: transparent;
+      flex: 1;
+    }
+
+    .search-input::placeholder,
+    .search-icon{
+      color: rgba(0,0,0,0.5);
+    }
+
+
+    .clear-button {
+      color: rgba(0,0,0,0.5);
+      padding: 0;
+      margin: 0 10px 0 0;
+      background: transparent;
+      border-radius: 15px;
+      border-style: unset;
+      cursor: pointer;
+      visibility: collapse;
+    }
+
+    /* Table styles */
+
+    .page-content {
+      overflow-y: auto;
+      padding: 25px;
+      padding-top: 85px;
+    }
+
+    #leaderboard, .masters-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    /* Table row styles */
+    #leaderboard tr, .masters-table tr {
+      border-bottom: 1px solid #bbbbbb;
+    }
+
+    #leaderboard th, .masters-table th {
+      background-color: #006747; /* Masters green background */
+      color: #ffd700; /* Gold text color */
+      padding: 10px;
+      text-align: center;
+      font-size: 30px; 
+      font-family: 'New Baskerville';
+      font-style: italic;
+      border: none;
+      position: sticky;
+      top: 0;
+    }
+
+    #leaderboard td, .masters-table td {
+      font-family: "Suisse Intl", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: start;
+      padding: 10px;
+      border: none;
+    }
+
+    /* Center alignment for Rank and Score columns */
+    #leaderboard td:last-child {
+      text-align: center;
+    }
+
+    #leaderboard tr:hover, .masters-table tr:hover {
+      background-color: #f2f2f2; /* Light grey background on hover */
+    }
+
+    /* Sub-header color */
+    .sub-header {
+      color: #757575;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-family: "Suisse Intl", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      border-bottom: #1a1a1a;
+      border-bottom-width: 1px;
+    }
+
+    /* Responsive font sizes */
+    @media screen and (max-width: 600px) {
+      #leaderboard th {
+        font-size: 18px; /* Adjusted font size for smaller screens */
+      }
+
+      .sub-header {
+        font-size: 16px; /* Adjusted font size for smaller screens */
+        color: #006747; /* Masters green */
+        border-bottom: #1a1a1a;
+      }
+    }
+
+    .fake-link {
+      cursor: pointer;
+    }
+
+    /* Styling for negative scores */
+    .negative-score {
+      color: #E53E3E;
+    }
+
+    /* Styling for positive scores */
+    .positive-score {
+      color: #1a1a1a;
+    }
+
+    .player-winner {
+      background: #006747;
+      color: #FFD700;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      padding-top: 60px; /* Location of the modal */
+    }
+
+    /* Modal content */
+    .modal-content {
+      background-color: #f4f4f4;
+      margin: 5% auto; /* 5% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+    }
+
+    /* Close button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-logo-menu-container">
+      <img class="navbar-logo" src="https://seeklogo.com/images/M/masters-golf-tournament-logo-5726818EF9-seeklogo.com.png" alt="Logo" style="display: inline-block;">
+      <ul class="navbar-menu-container">
+        <li><a id="link-leaderboard" class="active">Leaderboard</a></li>
+        <li><a id="link-payouts">Payouts</a></li>
+        <li><a id="link-raw-data">Raw Data</a></li>
+        <li><a id="link-lowday">Low Day</a></li>
+      </ul>
+    </div>
+    <form class="navbar-search-container">
+      <div class="search">
+        <span class="search-icon material-symbols-outlined">Search</span>
+        <input class="search-input" type="text" id="searchInput" onkeyup="searchTables()" placeholder="Search for a player...">
+        <button id="clearButton" type="button" class="clear-button material-symbols-outlined">Clear</button>
+     </div>
+    </form>
+  </nav>
+  <br>
+ 
+  <!-- Leaderboard table -->
+  <div id="leaderboard-page" class="page-content">
+    <table class="masters-table" id="leaderboard">
+      <tr>
+        <th colspan="3">Masters Leaderboard</th>
+      </tr>
+      <tr>
+        <td class="sub-header">Rank</td>
+        <td class="sub-header">Player</td>
+        <td class="sub-header">Score</td>
+      </tr>
+      <? var data = getDataFromGoogleSheet(); ?>
+      <? var leaderboardData = data.leaderboard; ?>
+      <? for (var i = 0; i < leaderboardData.length; i++) { ?>
+        <? if (i > 0) { ?>
+          <? if (!leaderboardData[i][0]) break; ?> <!-- Add this line to break out of the loop if there's no more data -->
+          <tr>
+            <td><?= leaderboardData[i][0] === '#VALUE!' ? '' : leaderboardData[i][0] ?></td>
+            <td><a class="fake-link <?= leaderboardData[i][3] === 1 ? 'player-winner' : '' ?>" onclick="showPlayerTeam('<?= leaderboardData[i][1] ?>')"><?= leaderboardData[i][1] ?></a></td>
+            <td class="<?= leaderboardData[i][2] < 0 ? 'negative-score' : 'positive-score' ?>"><?= leaderboardData[i][2] ?></td>
+          </tr>
+        <? } else { continue; } ?>
+      <? } ?>
+    </table>
+  </div>
+
+  <!-- Payouts table -->
+  <div id="payouts-page" style="display: none" class="page-content">
+    <table class="masters-table" id="payouts-table">
+      <tr>
+        <th colspan="4">Payouts</th>
+      </tr>
+      <tr>
+        <td class="sub-header">Place</td>
+        <td class="sub-header">Winner</td>
+        <td class="sub-header" style="text-align: right">Amount</td>
+        <td class="sub-header">Pay week</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Raw data table -->
+  <div id="raw-data-page" style="display: none" class="page-content">
+    <table class="masters-table" id="raw-data-table">
+      <tr>
+        <th colspan="11">Raw Data</th>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Low Day Leaderboard table -->
+  <div id="lowday-page" class="page-content">
+    <table class="masters-table" id="lowday">
+      <tr>
+        <th colspan="3">Low Day Leaderboard - Round 4</th>
+      </tr>
+      <tr>
+        <td class="sub-header">Rank</td>
+        <td class="sub-header">Player</td>
+        <td class="sub-header">Score</td>
+      </tr>
+      <? var data = getDataFromGoogleSheet(); ?>
+      <? var lowdayData = data.lowday; ?>
+      <? for (var i = 0; i < lowdayData.length; i++) { ?>
+        <? if (i > 0) { ?>
+          <? if (!lowdayData[i][0]) break; ?> <!-- Add this line to break out of the loop if there's no more data -->
+          <tr>
+            <td><?= lowdayData[i][0] ?></td>
+            <td><a class="fake-link <?= lowdayData[i][3] === 1 ? 'player-winner' : '' ?>" onclick="showPlayerTeam('<?= lowdayData[i][1] ?>')"><?= lowdayData[i][1] ?></a></td>
+            <td class="<?= lowdayData[i][2] < 0 ? 'negative-score' : 'positive-score' ?>"><?= lowdayData[i][2] ?></td>
+          </tr>
+        <? } else { continue; } ?>
+      <? } ?>
+    </table>
+  </div>
+
+  <!-- Player Team Modal -->
+  <div id="playerTeamModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="playerTeam"></div>
+    </div>
+  </div>
+
+  <script>
+    let globalData = {};
+
+    function showPlayerTeam(playerName) {
+      if (!globalData['PLAYERS'] || !globalData.rawData) {
+        console.log('DATA NOT LOADED. TRY AGAIN.');
+        return;
+      }
+
+      const nameColumnIndex = globalData.rawData[0].findIndex(x => x === 'PLAYER');
+      const thruColumnIndex = globalData.rawData[0].findIndex(x => x === 'THRU');
+
+      console.log('selected player', playerName);
+
+      const playerData = globalData.currentPage === 'lowday' ? globalData['PLAYERS_LOWDAY'].find(p => p[0] === playerName) : globalData['PLAYERS'].find(p => p[0] === playerName);
+
+      // Show player's name in heading
+      var modalContent = "<h2>" + playerName + "'s Team</h2>";
+
+      // Show player's rank and missed cut.
+      modalContent += `<label>Rank: </label><span>${playerData[playerData.length - 2]}</span><br>`;
+      modalContent += `<label>Missed cut: </label><span>${playerData[playerData.length - 3]}</span><br><br>`;
+
+      // Show player's team
+      modalContent += "<table id='leaderboard' border='1'><tr><th>Pick</th><th>Score</th><th>THRU</th></tr>"
+      for (var i = 2; i < playerData.length - 3; i += 2) {
+        const pickName = playerData[i];
+        const pickRawData = globalData.rawData.find(x => x[nameColumnIndex] === pickName)
+        const pickThru = pickRawData[thruColumnIndex] || "N/A";
+        modalContent += "<tr><td>" + pickName + "</td><td style='text-align: center' class='" + (playerData[i + 1] < 0 ? 'negative-score' : 'positive-score') + "'>" + playerData[i + 1] + "</td>" + "<td>" + pickThru + "</td></tr>";
+      }
+      modalContent += "</table><br>";
+
+      document.getElementById("playerTeam").innerHTML = modalContent;
+      document.getElementById("playerTeamModal").style.display = "block"; // Display the modal
+    }
+
+    function closeModal() {
+      document.getElementById("playerTeamModal").style.display = "none"; // Hide the modal
+    }
+
+    function searchTables() {
+      searchTable('leaderboard', 1);
+      searchTable('payouts-table', 1);
+      searchTable('raw-data-table', 1);
+      searchTable('lowday', 1);
+    }
+
+    function searchTable(tableId, colIndex) {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById(tableId);
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[colIndex]; // Targeting the second column
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+    function setLinkActive(linkElement, active) {
+      if (active) {
+        linkElement.classList.add('active'); 
+      } else {
+        linkElement.classList.remove('active')
+      }
+    }
+
+    function showPage(queryParam) {
+      console.log('showPage()', { links: globalData.links });
+      const links = globalData.links;
+      for (key in links) {
+        if (!links.hasOwnProperty(key)) continue;
+        const link = links[key];
+        console.log('showPage().link', link);
+        if (link.queryParam === queryParam) {
+          link.pageElement.style.display = 'block';
+          globalData.currentPage = queryParam;
+          setLinkActive(link.element, true);
+        } else {
+          link.pageElement.style.display = 'none';
+          setLinkActive(link.element, false);
+        }
+      }
+    }
+    
+    function onNavigationClicked(event, link) {
+      event.preventDefault();
+      history.pushState({page: link.queryParam}, link.title, '?page=' + link.queryParam);
+      console.log('onNavigationClicked.showPage')
+      showPage(link.queryParam);
+    }
+
+    function initNavigation() {
+      const links = {
+        'link-leaderboard': { queryParam: 'leaderboard', title: 'Leaderboard', pageId: 'leaderboard-page' },
+        'link-payouts': { queryParam: 'payouts', title: 'Payouts', pageId: 'payouts-page' },
+        'link-raw-data': { queryParam: 'raw-data', title: 'Raw Data', pageId: 'raw-data-page' },
+        'link-lowday': { queryParam: 'lowday', title: 'Low Day', pageId: 'lowday-page' }
+      }
+      globalData.links = links;
+
+      for (key in links) {
+        if (!links.hasOwnProperty(key)) continue;
+        links[key].element = document.getElementById(key);
+        links[key].pageElement = document.getElementById(links[key].pageId);
+      }
+
+        // Hide the "Low Day Leaderboard" page initially
+      document.getElementById(links['link-lowday'].pageId).style.display = 'none';
+
+      google.script.run
+        .withSuccessHandler(function(url) {
+          const baseUrl = url;
+
+          for (key in links) {
+            if (!links.hasOwnProperty(key)) continue;
+            const link = links[key];
+            link.element.href = baseUrl + '?page=' + link.queryParam;
+            link.element.addEventListener('click', function(event) {
+              onNavigationClicked(event, link)
+            });
+          }
+        })
+        .getUrl();
+    }
+
+    function initSearchBox() {
+      const searchInput = document.getElementById('searchInput');
+      const clearButton = document.getElementById('clearButton');
+
+      searchInput.addEventListener('focus', () => searchInput.select());
+      searchInput.addEventListener('input', () => {
+        console.log('input!', searchInput.value);
+        clearButton.style.visibility = searchInput.value ? 'unset' : 'collapse';
+      });
+
+      clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        searchTables();
+        clearButton.style.visibility = 'collapse';
+      })
+    }
+
+    function initPayoutsTable() {
+      const payoutsTable = document.getElementById('payouts-table');
+      const formatter = new Intl.NumberFormat('en-CA', {
+        style: 'currency',
+        currency: 'CAD',
+        minimumFractionDigits: 0,
+      });
+
+      // Loop from row 2 and column 4 to 7
+      for (let r = 0; r < globalData.payouts.length; r++) {
+        const tr = document.createElement('tr');
+        payoutsTable.appendChild(tr);
+        for (let c = 0; c < globalData.payouts[r].length; c++) {
+          const td = document.createElement('td');
+          const d = globalData.payouts[r][c];
+          tr.appendChild(td);
+          if (c === 1) {
+            const alink = document.createElement('a');
+            alink.className = 'fake-link';
+            alink.addEventListener('click', function() {
+              showPlayerTeam(d);
+            });
+            alink.innerHTML = d;
+            td.appendChild(alink);
+          } else if (c === 2) {
+            td.style['text-align'] = 'right';
+            td.innerHTML = formatter.format(Number(d).toFixed(0));
+          } else {
+            td.innerHTML = d;
+          }
+        }
+      }
+    }
+
+    function initRawDataTable() {
+      const rawDataTable = document.getElementById('raw-data-table');
+
+      // HEADER
+      const tr = document.createElement('tr');
+      rawDataTable.appendChild(tr);
+      for (let c = 0; c < globalData.rawData[0].length; c++) {
+        const td = document.createElement('td');
+        const d = globalData.rawData[0][c];
+        tr.appendChild(td);
+        td.classList.add('sub-header');
+        td.innerHTML = d;
+      }
+
+      // DATA
+      for (let r = 1; r < globalData.rawData.length; r++) {
+        const tr = document.createElement('tr');
+        rawDataTable.appendChild(tr);
+        for (let c = 0; c < globalData.rawData[r].length; c++) {
+          const td = document.createElement('td');
+          const d = globalData.rawData[r][c];
+          tr.appendChild(td);
+          td.innerHTML = d;
+        }
+      }
+    }
+
+    function initData() {
+      google.script.run
+        .withSuccessHandler(function(data) {
+          // Handle the data here. For example, log it:
+          console.log(data);
+          for (const key in data) {
+            if (!data.hasOwnProperty(key)) continue;
+            globalData[key] = data[key];
+          }
+        })
+        .getMultiSheetData(['LEADERBOARD', 'PLAYERS', 'PLAYERS_LOWDAY']);
+      google.script.run
+        .withSuccessHandler(function(data) {
+          // Handle the data here. For example, log it:
+          console.log('getPayoutsData().data', data);
+          globalData.payouts = data;
+          initPayoutsTable();
+        })
+        .getPayoutsData();
+      google.script.run
+        .withSuccessHandler(function(data) {
+          // Handle the data here. For example, log it:
+          console.log('getRawData().data', data);
+          globalData.rawData = data;
+          initRawDataTable();
+        })
+        .getRawDataV2();
+      
+    }
+
+    // Load all data in memory.
+    document.addEventListener('DOMContentLoaded', function() {
+      initData();
+      initNavigation();
+      initSearchBox();
+    });
+  </script>
+
+</body>
+</html>
